@@ -46,10 +46,6 @@ public class MainActivity extends AppCompatActivity {
         if ("".contains (name.getText ().toString ()) || "".contains (email.getText ().toString ())) {
             Toast.makeText (getApplicationContext (), "You are missing some inputs", Toast.LENGTH_LONG).show ();
         } else {
-        if (name.getText ().toString ().contains ("") || email.getText ().toString ().contains ("")) {
-            Toast.makeText (getApplicationContext(), "You are missing some files", Toast.LENGTH_LONG).show();
-        }
-
             student.setName (name.getText ().toString ());
             student.setEmail (email.getText ().toString ());
 

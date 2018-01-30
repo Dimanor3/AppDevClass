@@ -18,9 +18,9 @@
         </activity>
         <activity android:name=".DisplayActivity" />
         <activity android:name=".EditDepartmentActivity" />
-        <activity android:name=".editEmailActivity" />
-        <activity android:name=".editNameActivity" />
-        <activity android:name=".editMoodActivity"></activity>
+        <activity android:name=".EditEmailActivity" />
+        <activity android:name=".EditNameActivity" />
+        <activity android:name=".EditMoodActivity"></activity>
     </application>
 
 </manifest>
