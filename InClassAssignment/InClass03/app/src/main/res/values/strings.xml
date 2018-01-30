@@ -9,4 +9,9 @@
     <string name="strOthers">Others</string>
     <string name="strCurrentMood">Your Current Mood:</string>
     <string name="strSubmit">Submit</string>
+    <string name="name">Name:</string>
+    <string name="studentInfo">Student Infomation</string>
+    <string name="email">Email:</string>
+    <string name="department">Department:</string>
+    <string name="mood">Mood:</string>
 </resources>
