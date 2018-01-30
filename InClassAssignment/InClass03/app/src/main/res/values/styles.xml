@@ -10,4 +10,6 @@
 
     <style name="save">Save</style>
 
+    <style name="edit">edit</style>
+
 </resources>
