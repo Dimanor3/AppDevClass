@@ -3,43 +3,52 @@ package com.example.dimanor3.inclass03;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Created by Dimanor3 on 1/29/2018.
  */
 
-public class Student implements Parcelable {
+public class Student implements Serializable {
     String name, email, department;
     int mood;
 
-    protected Student (Parcel in) {
-        name = in.readString ();
-        email = in.readString ();
-        department = in.readString ();
-        mood = in.readInt ();
+    public Student (String name, String email, String department, int mood) {
+        this.name = name;
+        this.email = email;
+        this.department = department;
+        this.mood = mood;
     }
 
-    public static final Creator<Student> CREATOR = new Creator<Student> () {
-        @Override
-        public Student createFromParcel (Parcel in) {
-            return new Student (in);
-        }
-
-        @Override
-        public Student[] newArray (int size) {
-            return new Student[size];
-        }
-    };
-
-    @Override
-    public int describeContents () {
-        return 0;
+    public String getName () {
+        return name;
     }
 
-    @Override
-    public void writeToParcel (Parcel parcel, int i) {
-        parcel.writeString (name);
-        parcel.writeString (email);
-        parcel.writeString (department);
-        parcel.writeInt (mood);
+    public void setName (String name) {
+        this.name = name;
+    }
+
+    public String getEmail () {
+        return email;
+    }
+
+    public void setEmail (String email) {
+        this.email = email;
+    }
+
+    public String getDepartment () {
+        return department;
+    }
+
+    public void setDepartment (String department) {
+        this.department = department;
+    }
+
+    public int getMood () {
+        return mood;
+    }
+
+    public void setMood (int mood) {
+        this.mood = mood;
     }
 }

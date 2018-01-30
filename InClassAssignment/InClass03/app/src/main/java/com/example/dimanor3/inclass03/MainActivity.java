@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle ("Main Activity");
 
+        student = new Student ("", "", "", 0);
+
         name = (EditText) findViewById (R.id.editTextName);
         email = (EditText) findViewById (R.id.editTextEmail);
 
@@ -42,27 +44,28 @@ public class MainActivity extends AppCompatActivity {
 
         int id = radioGroup.getCheckedRadioButtonId ();
 
-        if (name.getText ().toString ().contains ("") || email.getText ().toString ().contains ("")) {
-            Toast.makeText ("", 5);
-        }
-
-        student.name = name.getText ().toString ();
-        student.email = email.getText ().toString ();
-
-        student.mood = seekBar.getProgress ();
-
-        if (id == R.id.radioSIS) {
-            student.department = "SIS";
-        } else if (id == R.id.radioCS) {
-            student.department = "CS";
-        } else if (id == R.id.radioBIO) {
-            student.department = "BIO";
+        if ("".contains (name.getText ().toString ()) || "".contains (email.getText ().toString ())) {
+            Toast.makeText (getApplicationContext (), "You are missing some inputs", Toast.LENGTH_LONG).show ();
         } else {
-            student.department = "Others";
+
+            student.setName (name.getText ().toString ());
+            student.setEmail (email.getText ().toString ());
+
+            student.setMood (seekBar.getProgress ());
+
+            if (id == R.id.radioSIS) {
+                student.setDepartment ("SIS");
+            } else if (id == R.id.radioCS) {
+                student.setDepartment ("CS");
+            } else if (id == R.id.radioBIO) {
+                student.setDepartment ("BIO");
+            } else {
+                student.setDepartment ("Others");
+            }
+
+            Intent intent = new Intent (this, DisplayActivity.class);
+
+            startActivity (intent);
         }
-
-        Intent intent = new Intent (this, DisplayActivity.class);
-
-        startActivity (intent);
     }
 }
