@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
+        //setContentView (R.layout.activity_main);
         setContentView (R.layout.activity_main);
-
         setTitle ("Main Activity");
 
         name = (EditText) findViewById (R.id.editTextName);
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         int id = radioGroup.getCheckedRadioButtonId ();
 
         if (name.getText ().toString ().contains ("") || email.getText ().toString ().contains ("")) {
-            Toast.makeText ("", 5);
+            Toast.makeText (getApplicationContext(), "You are missing some files", Toast.LENGTH_LONG).show();
         }
 
         student.name = name.getText ().toString ();
