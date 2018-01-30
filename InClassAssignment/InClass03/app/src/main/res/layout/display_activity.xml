@@ -84,4 +84,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/department" />
 
+    <Button
+        android:id="@+id/editEmail"
+        style="@style/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="10dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/department"
+        app:layout_constraintTop_toBottomOf="@+id/editName"
+        tools:layout_editor_absoluteX="280dp" />
+
+    <Button
+        android:id="@+id/editName"
+        style="@style/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="116dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="280dp" />
+
+    <Button
+        android:id="@+id/editDepartment"
+        style="@style/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginTop="9dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/mood"
+        app:layout_constraintTop_toBottomOf="@+id/editEmail"
+        tools:layout_editor_absoluteX="280dp" />
+
+    <Button
+        android:id="@+id/editMood"
+        style="@style/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="166dp"
+        android:layout_marginTop="18dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDepartment"
+        tools:layout_editor_absoluteX="280dp" />
+
 </android.support.constraint.ConstraintLayout>
