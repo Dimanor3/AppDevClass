@@ -42,9 +42,15 @@
         android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="126dp"
+        android:layout_marginEnd="145dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="61dp"
         android:ems="10"
         android:hint="@string/strName"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="154dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sudent_inf" />
 </android.support.constraint.ConstraintLayout>
