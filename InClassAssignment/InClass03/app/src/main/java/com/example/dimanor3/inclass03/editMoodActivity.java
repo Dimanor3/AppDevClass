@@ -6,8 +6,9 @@ import android.os.Bundle;
 public class EditMoodActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate (Bundle savedInstanceState) {
+        super.onCreate (savedInstanceState);
+
         setContentView (R.layout.edit_mood);
     }
 }
