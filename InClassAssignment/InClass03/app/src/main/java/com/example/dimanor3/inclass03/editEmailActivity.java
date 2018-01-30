@@ -1,3 +1,9 @@
+/*
+* Assignment #: 3
+* File Name: EditEmailActivity.java
+* Full Name: Bijan Razavi, Kushal Tiwari
+* */
+
 package com.example.dimanor3.inclass03;
 
 import android.content.Intent;
@@ -28,7 +34,9 @@ public class EditEmailActivity extends AppCompatActivity {
     public void saveEdit (View v) {
         Button button = (Button) v;
 
-        student.setEmail (email.getText ().toString ());
+        if (!"".contains (email.getText ().toString ())) {
+            student.setEmail (email.getText ().toString ());
+        }
 
         Intent intent = new Intent (this, DisplayActivity.class);
 

@@ -1,3 +1,9 @@
+/*
+* Assignment #: 3
+* File Name: DisplayActivity.java
+* Full Name: Bijan Razavi, Kushal Tiwari
+* */
+
 package com.example.dimanor3.inclass03;
 
 import android.content.Intent;
@@ -37,7 +43,7 @@ public class DisplayActivity extends AppCompatActivity {
         mood.setText (strMood);
     }
 
-    public void editName (View v) {
+    public void nameEdit (View v) {
         Button button = (Button) v;
 
         Intent intent = new Intent (this, EditNameActivity.class);
@@ -45,7 +51,7 @@ public class DisplayActivity extends AppCompatActivity {
         startActivity (intent);
     }
 
-    public void editEmail (View v) {
+    public void emailEdit (View v) {
         Button button = (Button) v;
 
         Intent intent = new Intent (this, EditEmailActivity.class);
@@ -53,7 +59,7 @@ public class DisplayActivity extends AppCompatActivity {
         startActivity (intent);
     }
 
-    public void editDepartment (View v) {
+    public void departmentEdit (View v) {
         Button button = (Button) v;
 
         Intent intent = new Intent (this, EditDepartmentActivity.class);
@@ -61,7 +67,7 @@ public class DisplayActivity extends AppCompatActivity {
         startActivity (intent);
     }
 
-    public void editMood (View v) {
+    public void moodEdit (View v) {
         Button button = (Button) v;
 
         Intent intent = new Intent (this, EditMoodActivity.class);

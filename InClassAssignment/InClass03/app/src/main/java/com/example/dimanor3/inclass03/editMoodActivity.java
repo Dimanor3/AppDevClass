@@ -1,3 +1,9 @@
+/*
+* Assignment #: 3
+* File Name: EditMoodActivity.java
+* Full Name: Bijan Razavi, Kushal Tiwari
+* */
+
 package com.example.dimanor3.inclass03;
 
 import android.content.Intent;

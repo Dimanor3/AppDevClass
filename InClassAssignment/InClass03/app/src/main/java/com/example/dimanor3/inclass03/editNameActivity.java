@@ -1,3 +1,9 @@
+/*
+* Assignment #: 3
+* File Name: EditNameActivity.java
+* Full Name: Bijan Razavi, Kushal Tiwari
+* */
+
 package com.example.dimanor3.inclass03;
 
 import android.content.Intent;
@@ -7,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.dimanor3.inclass03.MainActivity.student;
 
@@ -28,7 +35,9 @@ public class EditNameActivity extends AppCompatActivity {
     public void saveEdit (View v) {
         Button button = (Button) v;
 
-        student.setName (name.getText ().toString ());
+        if (!"".contains (name.getText ().toString ())) {
+            student.setName (name.getText ().toString ());
+        }
 
         Intent intent = new Intent (this, DisplayActivity.class);
 

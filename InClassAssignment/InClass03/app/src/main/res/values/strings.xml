@@ -16,4 +16,5 @@
     <string name="mood">Mood:</string>
     <string name="edit">Edit Information</string>
     <string name="saveEdit">Save Edits</string>
+    <string name="strEdit">Edit</string>
 </resources>
