@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
+        //setContentView (R.layout.activity_main);
         setContentView (R.layout.activity_main);
-
         setTitle ("Main Activity");
 
         student = new Student ("", "", "", 0);
@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         if ("".contains (name.getText ().toString ()) || "".contains (email.getText ().toString ())) {
             Toast.makeText (getApplicationContext (), "You are missing some inputs", Toast.LENGTH_LONG).show ();
-        } else {
-
+        } else{
             student.setName (name.getText ().toString ());
             student.setEmail (email.getText ().toString ());
 
