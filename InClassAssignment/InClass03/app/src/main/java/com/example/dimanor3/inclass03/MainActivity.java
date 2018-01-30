@@ -21,12 +21,11 @@ public class MainActivity extends AppCompatActivity {
     private EditText name, email;
     private RadioGroup radioGroup;
     private SeekBar seekBar;
-    private Student student;
+    public static Student student;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
-        //setContentView (R.layout.activity_main);
         setContentView (R.layout.activity_main);
         setTitle ("Main Activity");
 
@@ -46,7 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
         if ("".contains (name.getText ().toString ()) || "".contains (email.getText ().toString ())) {
             Toast.makeText (getApplicationContext (), "You are missing some inputs", Toast.LENGTH_LONG).show ();
-        } else{
+        } else {
+        if (name.getText ().toString ().contains ("") || email.getText ().toString ().contains ("")) {
+            Toast.makeText (getApplicationContext(), "You are missing some files", Toast.LENGTH_LONG).show();
+        }
+
             student.setName (name.getText ().toString ());
             student.setEmail (email.getText ().toString ());
 
