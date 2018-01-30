@@ -9,6 +9,6 @@ public class EditDepartmentActivity extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
 
-        setContentView (R.layout.editdepartment);
+        setContentView (R.layout.edit_department);
     }
 }
