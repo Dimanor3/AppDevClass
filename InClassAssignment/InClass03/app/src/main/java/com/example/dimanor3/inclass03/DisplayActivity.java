@@ -29,7 +29,7 @@ public class DisplayActivity extends AppCompatActivity {
         strName = name.getText ().toString () + " " + student.getName ();
         strEmail = email.getText ().toString () + " " + student.getEmail ();
         strDepartment = department.getText ().toString () + " " + student.getDepartment ();
-        strMood = mood.getText ().toString () + " " + student.getMood ();
+        strMood = mood.getText ().toString () + " " + student.getMood () + "%";
 
         name.setText (strName);
         email.setText (strEmail);

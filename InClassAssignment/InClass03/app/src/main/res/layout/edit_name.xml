@@ -26,20 +26,21 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/saveEdit"
         style="@style/save"
         android:layout_width="366dp"
         android:layout_height="80dp"
         android:layout_marginBottom="105dp"
         android:layout_marginEnd="2dp"
         android:layout_marginStart="16dp"
-        android:text="Button"
+        android:text="@string/saveEdit"
+        android:onClick="saveEdit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="126dp"
@@ -49,8 +50,8 @@
         android:ems="10"
         android:hint="@string/strName"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/saveEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sudent_inf" />
+        app:layout_constraintTop_toBottomOf="@+id/sudent_inf"/>
 </android.support.constraint.ConstraintLayout>
