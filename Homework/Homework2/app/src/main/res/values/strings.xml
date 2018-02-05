@@ -7,4 +7,11 @@
     <string name="plus">+</string>
     <string name="newTask">New Task</string>
     <string name="firstTask">1st Task</string>
+    <string name="title">title</string>
+    <string name="date">date</string>
+    <string name="time">time</string>
+    <string name="Priority">priority</string>
+    <string name="high">High</string>
+    <string name="Medium">Medium</string>
+    <string name="Low">Low</string>
 </resources>
