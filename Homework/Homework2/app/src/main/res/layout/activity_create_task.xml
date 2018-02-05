@@ -32,11 +32,11 @@
         android:layout_marginTop="19dp"
         android:ems="10"
         android:hint="@string/date"
-        android:inputType="textPersonName"
+        android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title2" />
+        app:layout_constraintTop_toBottomOf="@+id/title2"/>
 
     <EditText
         android:id="@+id/time"
@@ -48,20 +48,21 @@
         android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="@string/time"
-        android:inputType="textPersonName"
+        android:inputType="time"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date " />
+        app:layout_constraintTop_toBottomOf="@+id/date "/>
 
     <TextView
-        android:id="@+id/Priority"
-        android:layout_width="141dp"
-        android:layout_height="42dp"
+        android:id="@+id/priority"
+        android:layout_width="139dp"
+        android:layout_height="25dp"
         android:text="TextView"
+        android:textColor="@android:color/black"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="264dp"
-        tools:text="@string/Priority" />
+        tools:layout_editor_absoluteY="281dp"
+        tools:text="@string/Priority"/>
 
     <RadioGroup
         android:layout_width="wrap_content"
