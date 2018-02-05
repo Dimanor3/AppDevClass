@@ -52,24 +52,99 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <Button
-        android:id="@+id/newTask"
-        android:layout_width="104dp"
-        android:layout_height="47dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginTop="2dp"
-        android:text="@string/newTask"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:id="@+id/gotoFirstTask"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:onClick="gotoFirst"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/if_back_backwards_repeat_arrows_arrow_blue_1872774"/>
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="63dp"
-        android:layout_height="65dp"
-        app:srcCompat="@drawable/if_back_backwards_repeat_arrows_arrow_blue_1872774"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="430dp"/>
+        android:id="@+id/gotoPreviousTask"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="gotoPrevious"
+        app:layout_constraintStart_toEndOf="@+id/gotoFirstTask"
+        app:srcCompat="@drawable/if_arrow_back_backwards_repeat_previous_blue_1872775"/>
+
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:onClick="edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gotoPreviousTask"
+        app:srcCompat="@drawable/if_compose_1891025"/>
+
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="20dp"
+        android:onClick="delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gotoNextTask"
+        app:layout_constraintStart_toEndOf="@+id/edit"
+        app:srcCompat="@drawable/if_close_1891023"/>
+
+    <ImageView
+        android:id="@+id/gotoNextTask"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="12dp"
+        android:onClick="gotoNext"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gotoLastTask"
+        app:srcCompat="@drawable/if_music_forward_front_next_arrow_blue_1872772"/>
+
+    <ImageView
+        android:id="@+id/gotoLastTask"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="gotoLast"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/if_forward_arrows_arrow_front_go_blue_1872773"/>
+
+    <TextView
+        android:id="@+id/taskOf"
+        android:layout_width="243dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/taskOf"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/edit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:id="@+id/newTask"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:onClick="makeNewTask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/if_plus_1891033"/>
 
 </android.support.constraint.ConstraintLayout>

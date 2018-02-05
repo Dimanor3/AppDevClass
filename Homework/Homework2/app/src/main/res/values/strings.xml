@@ -7,4 +7,5 @@
     <string name="plus">+</string>
     <string name="newTask">New Task</string>
     <string name="firstTask">1st Task</string>
+    <string name="taskOf">Task M of N</string>
 </resources>
