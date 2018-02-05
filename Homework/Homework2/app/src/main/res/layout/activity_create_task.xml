@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.dimanor3.hw2_groups3.createTask">
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             tools:context="com.example.dimanor3.hw2_groups3.createTask">
 
     <EditText
-        android:id="@+id/title2"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="449dp"
@@ -20,10 +20,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
-        android:id="@+id/date "
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -36,7 +36,7 @@
         app:layout_constraintBottom_toTopOf="@+id/time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title2"/>
+        app:layout_constraintTop_toBottomOf="@+id/title"/>
 
     <EditText
         android:id="@+id/time"
@@ -52,47 +52,69 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date "/>
+        app:layout_constraintTop_toBottomOf="@+id/date"/>
 
     <TextView
         android:id="@+id/priority"
-        android:layout_width="139dp"
-        android:layout_height="25dp"
-        android:text="TextView"
+        android:layout_width="49dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/Priority"
         android:textColor="@android:color/black"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="281dp"
-        tools:text="@string/Priority"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time"
+        />
 
     <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="336dp">
+        android:id="@+id/radioGroup"
+        android:layout_width="89dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priority">
 
         <RadioButton
-            android:id="@+id/High"
+            android:id="@+id/high"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="RadioButton"
-            tools:text="@string/high" />
+            android:checked="true"
+            android:text="@string/high"
+            />
 
         <RadioButton
-            android:id="@+id/Medium"
+            android:id="@+id/medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="RadioButton"
-            tools:text="@string/Medium" />
+            android:text="@string/Medium"
+            />
 
         <RadioButton
             android:id="@+id/low"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="RadioButton"
-            tools:text="@string/Low" />
+            android:text="@string/Low"
+            />
 
     </RadioGroup>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="368dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="save"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.555"/>
 </android.support.constraint.ConstraintLayout>

@@ -1,9 +1,3 @@
-/*
-* Homework Assignment:  2
-* File Name:            task.java
-* Full Name:            Bijan Razavi, Kushal Tiwari
-* */
-
 package com.example.dimanor3.hw2_groups3;
 
 import java.io.Serializable;
@@ -15,12 +9,9 @@ import java.util.Date;
  */
 
 public class task implements Serializable {
-    String title;
-    int priority;
-    Date date;
-    Time time;
+    private String title, priority, date, time;
 
-    public task (String title, int priority, Date date, Time time) {
+    public task (String title, String priority, String date, String time) {
         this.title = title;
         this.priority = priority;
         this.date = date;
@@ -35,27 +26,27 @@ public class task implements Serializable {
         this.title = title;
     }
 
-    public int getPriority () {
+    public String getPriority () {
         return priority;
     }
 
-    public void setPriority (int priority) {
+    public void setPriority (String priority) {
         this.priority = priority;
     }
 
-    public Date getDate () {
+    public String getDate () {
         return date;
     }
 
-    public void setDate (Date date) {
+    public void setDate (String date) {
         this.date = date;
     }
 
-    public Time getTime () {
+    public String getTime () {
         return time;
     }
 
-    public void setTime (Time time) {
+    public void setTime (String time) {
         this.time = time;
     }
 }

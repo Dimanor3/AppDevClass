@@ -12,4 +12,5 @@
     <string name="high">High</string>
     <string name="Medium">Medium</string>
     <string name="Low">Low</string>
+    <string name="save">Save</string>
 </resources>
