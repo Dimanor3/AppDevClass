@@ -36,14 +36,14 @@
 
     <TextView
         android:id="@+id/tipPercent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="29dp"
+        android:layout_height="23dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="80dp"
         android:text="@string/tipPercent"
         android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/billTotal"/>
+        app:layout_constraintTop_toBottomOf="@+id/billTotal" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -51,9 +51,10 @@
         android:layout_height="33dp"
         android:layout_marginEnd="1dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.695"
         app:layout_constraintStart_toEndOf="@+id/tipPercent"
         app:layout_constraintTop_toBottomOf="@+id/billValue">
 
@@ -63,28 +64,28 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="@string/tenPercent"/>
+            android:text="@string/tenPercent" />
 
         <RadioButton
             android:id="@+id/percent2"
             android:layout_width="10dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/fifteenPercent"/>
+            android:text="@string/fifteenPercent" />
 
         <RadioButton
             android:id="@+id/percent3"
             android:layout_width="9dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/eighteenPercent"/>
+            android:text="@string/eighteenPercent" />
 
         <RadioButton
             android:id="@+id/customPercent"
             android:layout_width="42dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/customPercent"/>
+            android:text="@string/customPercent" />
     </RadioGroup>
 
     <TextView

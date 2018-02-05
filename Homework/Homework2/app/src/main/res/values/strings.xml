@@ -4,8 +4,12 @@
     <string name="taskDate">Task Date</string>
     <string name="taskTime">Task Time</string>
     <string name="taskPriority">Task Priority</string>
-    <string name="plus">+</string>
-    <string name="newTask">New Task</string>
-    <string name="firstTask">1st Task</string>
     <string name="taskOf">Task M of N</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="Priority">Priority</string>
+    <string name="high">High</string>
+    <string name="Medium">Medium</string>
+    <string name="Low">Low</string>
 </resources>

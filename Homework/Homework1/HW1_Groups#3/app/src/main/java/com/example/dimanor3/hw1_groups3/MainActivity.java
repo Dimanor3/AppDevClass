@@ -38,7 +38,15 @@ public class MainActivity extends AppCompatActivity {
 
 		enterBillValue = (EditText) findViewById (R.id.billValue);
 
-		enterBillValue.setError ("Enter Bill Total!");
+		enterBillValue.setError("Enter Bill Total!");
+		/*
+		This is to set defalut value to 0 if bill value is zero
+		 */
+		if (enterBillValue == null);
+		{
+			String zero = "0.0";
+			enterBillValue.setText(zero);
+		}
 
         // Tip amount and total amount
 		tipAmount = (TextView) findViewById (R.id.tipAmount);
