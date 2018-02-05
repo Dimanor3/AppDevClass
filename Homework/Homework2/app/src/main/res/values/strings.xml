@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">HW2_Groups#3</string>
+    <string name="taskTitle">Task Title</string>
+    <string name="taskDate">Task Date</string>
+    <string name="taskTime">Task Time</string>
+    <string name="taskPriority">Task Priority</string>
+    <string name="plus">+</string>
+    <string name="newTask">New Task</string>
+    <string name="firstTask">1st Task</string>
+</resources>
