@@ -2,8 +2,11 @@
     <string name="app_name">Group#3_InClass04</string>
 
     <string name="Count">Password Count: </string>
-    <string name="passwordLength">Select Password Length</string>
+    <string name="passwordLength">Select Password Length:</string>
 
     <string name="welcome">Welcome to the Password Generator!</string>
+    <string name="password">Password:</string>
+    <string name="ButtionThead">Generate Button (Thread)</string>
+    <string name="ButttonAsync">Generate Password (Async)</string>
 
 </resources>
