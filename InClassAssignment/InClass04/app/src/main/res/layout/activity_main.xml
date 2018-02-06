@@ -9,10 +9,25 @@
 
     <TextView
         android:id="@+id/textView"
+<<<<<<< HEAD
         android:layout_width="108dp"
         android:layout_height="41dp"
         android:text="TextView"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="27dp" />
 
+=======
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginBottom="247dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="246dp"
+        android:text="@string/welcome"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+>>>>>>> 438c84857da5d711b1305a6d18b84b373023d1f8
 </android.support.constraint.ConstraintLayout>
