@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="maxLen">23</integer>
+    <integer name="maxCount">10</integer>
+    <integer name="minLen">8</integer>
+    <integer name="minCount">1</integer>
+</resources>
