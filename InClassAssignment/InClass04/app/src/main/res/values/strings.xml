@@ -3,4 +3,7 @@
     <string name="count">Password Count: </string>
     <string name="passwordLength">Select Password Length</string>
     <string name="welcome">Welcome to the Password Generator!</string>
+    <string name="password">Password:</string>
+    <string name="buttionThead">Generate Button (Thread)</string>
+    <string name="butttonAsync">Generate Password (Async)</string>
 </resources>

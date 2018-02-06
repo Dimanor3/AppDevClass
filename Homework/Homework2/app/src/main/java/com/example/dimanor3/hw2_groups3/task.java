@@ -8,10 +8,10 @@ import java.util.Date;
  * Created by Dimanor3 on 2/5/2018.
  */
 
-public class task implements Serializable {
+public class Task implements Serializable {
     private String title, priority, date, time;
 
-    public task (String title, String priority, String date, String time) {
+    public Task (String title, String priority, String date, String time) {
         this.title = title;
         this.priority = priority;
         this.date = date;

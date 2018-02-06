@@ -7,12 +7,10 @@
 package com.example.dimanor3.hw2_groups3;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +18,7 @@ import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
 
-    LinkedList<task> tasks = new LinkedList<> ();
+    LinkedList<Task> Tasks = new LinkedList<> ();
     TextView taskTitle, taskTime, taskDate, taskPriority;
 
     // Access to taskOf textview to dynamically update text
@@ -40,12 +38,12 @@ public class MainActivity extends AppCompatActivity {
         taskTime = (TextView) findViewById (R.id.taskTime);
         taskPriority = (TextView) findViewById (R.id.taskPriority);
 
-        if (tasks.size () == 0) {
+        if (Tasks.size () == 0) {
             taskIndex = -1;
         }
 
         taskOf = (TextView) findViewById (R.id.taskOf);
-        task = "task " + Integer.toString (taskIndex + 1) + " of " + Integer.toString (tasks.size ());
+        task = "Task " + Integer.toString (taskIndex + 1) + " of " + Integer.toString (Tasks.size ());
         taskOf.setText (task);
     }
 
@@ -54,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult (requestCode, resultCode, data);
 
         if (requestCode == 0 && resultCode == RESULT_OK) {
-            String test = data.getExtras ().getString ("result");
+            Task test = (Task) data.getExtras ().getSerializable ("result");
 
-            //tasks.add ();
+            //Tasks.add ();
         }
     }
 
@@ -88,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void delete (View v) {
-        tasks.remove (taskIndex);
+        Tasks.remove (taskIndex);
 
         Log.d ("Test", "DELETED!!!");
     }
 
     public void gotoNext (View v) {
-        if (taskIndex < tasks.size () - 1) {
+        if (taskIndex < Tasks.size () - 1) {
             taskIndex++;
         } else {
             Toast.makeText (this, "Can't go any further!", Toast.LENGTH_SHORT).show ();
@@ -104,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void gotoLast (View v) {
-        taskIndex = tasks.size () - 1;
+        taskIndex = Tasks.size () - 1;
 
         Log.d ("Test", "LAST!!!");
     }
