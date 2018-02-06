@@ -1,3 +1,9 @@
+/*
+* Assignment#:  InClass 03
+* File Name:    PasswordGenerator.java
+* Full Name:    Bijan Razavi, Kushal Tiwari
+* */
+
 package com.example.dimanor3.group3_inclass04;
 
 import android.support.v7.app.AppCompatActivity;

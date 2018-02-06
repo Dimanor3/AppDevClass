@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
         new Handler ().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //Intent intent = new Intent (this, PasswordGenerator.class);
+                Intent intent = new Intent (MainActivity.this, PasswordGenerator.class);
 
-                //startActivity (intent);
+                startActivity (intent);
             }
         }, 3000);
     }
