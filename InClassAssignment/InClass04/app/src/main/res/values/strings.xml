@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Group#3_InClass04</string>
+    <string name="welcome">Welcome to the Password Generator!</string>
 </resources>
