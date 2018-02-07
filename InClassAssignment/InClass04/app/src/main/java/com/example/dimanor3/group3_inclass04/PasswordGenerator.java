@@ -9,15 +9,18 @@ package com.example.dimanor3.group3_inclass04;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -48,13 +51,6 @@ public class PasswordGenerator extends AppCompatActivity {
 		count = 1;
 		length = 8;
 
-        // Progress Dialog Setup
-		progressDialog = new ProgressDialog (this);
-		progressDialog.setMessage ("Creating New Passwords!");
-		progressDialog.setMax (count);
-		progressDialog.setProgressStyle (ProgressDialog.STYLE_HORIZONTAL);
-		progressDialog.setCancelable (false);
-
 		builder = new AlertDialog.Builder (this).setTitle ("Your Generated Passwords:").setCancelable (true);
 
         passwordCount = (TextView) findViewById (R.id.pC);
@@ -68,9 +64,11 @@ public class PasswordGenerator extends AppCompatActivity {
         passC.setOnSeekBarChangeListener (new SeekBar.OnSeekBarChangeListener () {
             @Override
             public void onProgressChanged (SeekBar seekBar, int i, boolean b) {
-                count = i + 1;
+				count = i + 1;
 
-				progressDialog.setMax (count);
+				if (progressDialog != null) {
+					progressDialog.setMax (count);
+				}
 
                 passwordCount.setText (String.format ("%s", count));
             }
@@ -111,6 +109,8 @@ public class PasswordGenerator extends AppCompatActivity {
             public boolean handleMessage (Message msg) {
             	switch (msg.what) {
 					case DoWork.STATUS_START:
+						setupProgress ();
+
 						progressDialog.setProgress (0);
 						progressDialog.show ();
 						break;
@@ -188,13 +188,67 @@ public class PasswordGenerator extends AppCompatActivity {
         }
     }
 
-	public void thread (View v) {
-		progressDialog.setProgress (0);
+    class DoWorkAsync extends AsyncTask <Integer, Integer, ArrayList<String>> {
+		@Override
+		protected void onPreExecute () {
+			setupProgress ();
+			progressDialog.show ();
+		}
 
+		@Override
+		protected void onPostExecute (ArrayList<String> strings) {
+			progressDialog.dismiss ();
+
+			final String[] pass = strings.toArray (new String[passwords.size ()]);
+
+			builder.setItems (pass, new DialogInterface.OnClickListener () {
+				@Override
+				public void onClick (DialogInterface dialogInterface, int i) {
+					Log.d ("test", "Pass: " + pass[i]);
+					selectedPassword = "Password: " + pass[i];
+					displaySelectedPassword.setText (selectedPassword);
+				}
+			});
+
+			alertDialog = builder.create ();
+
+			alertDialog.show ();
+
+			strings.clear ();
+		}
+
+		@Override
+		protected void onProgressUpdate (Integer... values) {
+			progressDialog.incrementProgressBy (1);
+		}
+
+		@Override
+		protected ArrayList<String> doInBackground (Integer... integers) {
+			ArrayList<String> pw = new ArrayList<> ();
+
+			for (int i = 0; i < integers[0]; i++) {
+				pw.add (Util.getPassword (integers [1]));
+
+				publishProgress (i);
+			}
+
+			return pw;
+		}
+	}
+
+	public void thread (View v) {
     	threadPool.execute (new DoWork ());
 	}
 
     public void async (View v) {
-
+		new DoWorkAsync ().execute (count, length);
     }
+
+    public void setupProgress () {
+		progressDialog = new ProgressDialog (PasswordGenerator.this);
+		progressDialog.setMessage ("Creating New Passwords!");
+		progressDialog.setMax (count);
+		progressDialog.setProgressStyle (ProgressDialog.STYLE_HORIZONTAL);
+		progressDialog.setCancelable (false);
+	}
 }
