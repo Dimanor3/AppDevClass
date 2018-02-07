@@ -15,20 +15,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class PasswordGenerator extends AppCompatActivity {
-    TextView passwordCount, passwordLength;
+    TextView passwordCount, passwordLength, displaySelectedPassword;
     SeekBar passC, passL;
     LinkedList<String> passwords = new LinkedList<> ();
+    String selectedPassword;
     int count, length;
 
     AlertDialog.Builder builder;
@@ -61,6 +59,7 @@ public class PasswordGenerator extends AppCompatActivity {
 
         passwordCount = (TextView) findViewById (R.id.pC);
         passwordLength = (TextView) findViewById (R.id.pL);
+		displaySelectedPassword = (TextView) findViewById (R.id.dispSelectedPass);
         passC = (SeekBar) findViewById (R.id.passwordCount);
         passL = (SeekBar) findViewById (R.id.passwordLength);
 
@@ -106,6 +105,7 @@ public class PasswordGenerator extends AppCompatActivity {
             }
         });
 
+        // The handler fully setup!
         handler = new Handler (new Handler.Callback () {
             @Override
             public boolean handleMessage (Message msg) {
@@ -119,19 +119,21 @@ public class PasswordGenerator extends AppCompatActivity {
 						passwords.add (msg.obj.toString ());
 
 						Log.d ("test", "received pw: " + msg.obj);
-						
+
 						progressDialog.incrementProgressBy (1);
 						break;
 
 					case DoWork.STATUS_STOP:
 						progressDialog.dismiss ();
 
-						String[] pass = passwords.toArray (new String[passwords.size ()]);
+						final String[] pass = passwords.toArray (new String[passwords.size ()]);
 
 						builder.setItems (pass, new DialogInterface.OnClickListener () {
 							@Override
 							public void onClick (DialogInterface dialogInterface, int i) {
-
+								Log.d ("test", "Pass: " + pass[i]);
+								selectedPassword = "Password: " + pass[i];
+								displaySelectedPassword.setText (selectedPassword);
 							}
 						});
 
