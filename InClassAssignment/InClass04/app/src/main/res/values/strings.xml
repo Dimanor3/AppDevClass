@@ -6,6 +6,6 @@
     <string name="buttonThead">Generate Passwords (Thread)</string>
     <string name="buttonAsync">Generate Passwords (Async Task)</string>
     <string name="passLength">Select Password Length:</string>
-    <string name="zero">1</string>
+    <string name="one">1</string>
     <string name="eight">8</string>
 </resources>

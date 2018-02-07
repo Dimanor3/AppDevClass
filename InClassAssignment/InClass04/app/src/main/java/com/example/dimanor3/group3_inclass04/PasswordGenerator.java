@@ -6,11 +6,14 @@
 
 package com.example.dimanor3.group3_inclass04;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -25,10 +28,17 @@ import java.util.concurrent.Executors;
 public class PasswordGenerator extends AppCompatActivity {
     TextView passwordCount, passwordLength;
     SeekBar passC, passL;
-    Util passGen;
     LinkedList<String> passwords = new LinkedList<> ();
+    int count, length;
+
+    AlertDialog.Builder builder;
+    AlertDialog alertDialog;
 
     Handler handler;
+
+	ProgressDialog progressDialog;
+
+	ExecutorService threadPool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +47,33 @@ public class PasswordGenerator extends AppCompatActivity {
 
         setTitle ("Password Generator");
 
+		count = 1;
+		length = 8;
+
+        // Progress Dialog Setup
+		progressDialog = new ProgressDialog (this);
+		progressDialog.setMessage ("Creating New Passwords!");
+		progressDialog.setMax (count);
+		progressDialog.setProgressStyle (ProgressDialog.STYLE_HORIZONTAL);
+		progressDialog.setCancelable (false);
+
+		builder = new AlertDialog.Builder (this).setTitle ("Your Generated Passwords:").setCancelable (true);
+
         passwordCount = (TextView) findViewById (R.id.pC);
         passwordLength = (TextView) findViewById (R.id.pL);
         passC = (SeekBar) findViewById (R.id.passwordCount);
         passL = (SeekBar) findViewById (R.id.passwordLength);
 
-        ProgressDialog progressDialog;
-
-        ExecutorService threadPool;
-
-        passGen = new Util ();
+		threadPool = Executors.newFixedThreadPool (2);
 
         passC.setOnSeekBarChangeListener (new SeekBar.OnSeekBarChangeListener () {
             @Override
             public void onProgressChanged (SeekBar seekBar, int i, boolean b) {
-                passwordCount.setText (String.format ("%s", i));
+                count = i + 1;
+
+				progressDialog.setMax (count);
+
+                passwordCount.setText (String.format ("%s", count));
             }
 
             @Override
@@ -68,7 +90,9 @@ public class PasswordGenerator extends AppCompatActivity {
         passL.setOnSeekBarChangeListener (new SeekBar.OnSeekBarChangeListener () {
             @Override
             public void onProgressChanged (SeekBar seekBar, int i, boolean b) {
-                passwordLength.setText (String.format ("%s", i));
+                length = i + 8;
+
+                passwordLength.setText (String.format ("%s", length));
             }
 
             @Override
@@ -84,32 +108,91 @@ public class PasswordGenerator extends AppCompatActivity {
 
         handler = new Handler (new Handler.Callback () {
             @Override
-            public boolean handleMessage (Message message) {
+            public boolean handleMessage (Message msg) {
+            	switch (msg.what) {
+					case DoWork.STATUS_START:
+						progressDialog.setProgress (0);
+						progressDialog.show ();
+						break;
+
+					case DoWork.STATUS_PROGRESS:
+						passwords.add (msg.obj.toString ());
+
+						Log.d ("test", "received pw: " + msg.obj);
+						
+						progressDialog.incrementProgressBy (1);
+						break;
+
+					case DoWork.STATUS_STOP:
+						progressDialog.dismiss ();
+
+						String[] pass = passwords.toArray (new String[passwords.size ()]);
+
+						builder.setItems (pass, new DialogInterface.OnClickListener () {
+							@Override
+							public void onClick (DialogInterface dialogInterface, int i) {
+
+							}
+						});
+
+						alertDialog = builder.create ();
+
+						alertDialog.show ();
+
+						for (int i = 0; i < count; i++) {
+							Log.d ("complete", "Password " + (i + 1) + ": " + passwords.get (i));
+						}
+
+						passwords.clear ();
+						break;
+				}
+
                 return false;
             }
         });
-
-        threadPool = Executors.newFixedThreadPool (2);
     }
 
     class DoWork implements Runnable {
+    	static final int STATUS_START = 0x00;
+		static final int STATUS_PROGRESS = 0x01;
+		static final int STATUS_STOP = 0x02;
+
+		String pw;
+
         @Override
         public void run () {
-            for (int i = 0; i < passC.getProgress (); i++) {
-                passwords.add (passGen.getPassword (passL.getProgress ()));
+        	Message startMsg = new Message ();
+
+        	startMsg.what = STATUS_START;
+
+        	handler.sendMessage (startMsg);
+
+			for (int i = 0; i < count; i++) {
+				Message msg = new Message ();
+
+                pw = Util.getPassword (length);
+
+				msg.what = STATUS_PROGRESS;
+				msg.obj = pw;
+
+				handler.sendMessage (msg);
             }
+
+			Message stopMsg = new Message ();
+
+			stopMsg.what = STATUS_STOP;
+
+			handler.sendMessage (stopMsg);
         }
     }
 
+	public void thread (View v) {
+		progressDialog.setProgress (0);
+
+    	threadPool.execute (new DoWork ());
+	}
+
     public void async (View v) {
-        Button button = (Button) v;
-
-
-    }
-
-    public void thread (View v) {
-        Button button = (Button) v;
-
 
     }
 }
