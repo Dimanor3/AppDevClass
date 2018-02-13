@@ -8,6 +8,8 @@ package com.example.dimanor3.inclass05;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -16,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,14 +28,19 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
-    LinkedList<String> data;
+    LinkedList<String> data, imageLinks;
+
+    RequestParams params = new RequestParams ();
 
     TextView searchKeyword;
     String newText = "";
+
+    ImageView imageView;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -40,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView (R.layout.activity_main);
 
         searchKeyword = (TextView) findViewById (R.id.searchKeywordTextView);
+        imageView = (ImageView) findViewById (R.id.imageView);
     }
 
     public void go (View v) {
         if (isConnected ()) {
-            new GetDataKeywordAsync ().execute (" http://dev.theappsdr.com/apis/photos/keywords.php");
-
+            new GetDataKeywordAsync ().execute ("http://dev.theappsdr.com/apis/photos/keywords.php");
         } else {
             Toast.makeText (MainActivity.this, "No Internet Connection!", Toast.LENGTH_SHORT).show ();
         }
@@ -73,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
                     searchKeyword.setText (newText);
 
-                    new GetDataKeywordAsync ().execute ();
+                    params.addParameter ("keyword", newText);
+
+                    new GetDataParamsUsingGetAsync (params).execute ("http://dev.theappsdr.com/apis/photos/index.php");
                 }
             });
 
@@ -86,69 +96,53 @@ public class MainActivity extends AppCompatActivity {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService (Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo ();
 
-        if (networkInfo == null || !networkInfo.isConnected () ||
-                (networkInfo.getType () != ConnectivityManager.TYPE_WIFI
-                        && networkInfo.getType () != ConnectivityManager.TYPE_MOBILE)) {
-            return false;
-        }
-
-        return true;
+        return !(networkInfo == null || !networkInfo.isConnected () ||
+				(networkInfo.getType () != ConnectivityManager.TYPE_WIFI
+						&& networkInfo.getType () != ConnectivityManager.TYPE_MOBILE));
     }
 
-    private class GetDataPicLinkAsync extends AsyncTask <String, Void, LinkedList<String>> {
-        BufferedReader reader = null;
+    private class GetDataPicLinkAsync extends AsyncTask <String, Void, Void> {
+		ImageView imageView;
 
-        LinkedList<String> linkedList = new LinkedList<String> ();
+		Bitmap bitmap = null;
 
-        HttpURLConnection connection = null;
+		public GetDataPicLinkAsync (ImageView imageView) {
+			this.imageView = imageView;
+		}
 
-        @Override
-        protected LinkedList<String> doInBackground (String... params) {
-            try {
-                URL url = new URL (params[0]);
+		@Override
+		protected Void doInBackground (String... params) {
+			HttpURLConnection connection = null;
 
-                connection = (HttpURLConnection) url.openConnection ();
+			// Bitmap image = null;
+			bitmap = null;
 
-                reader = new BufferedReader (new InputStreamReader (connection.getInputStream ()));
+			try {
+				URL url = new URL (params[0]);
+				connection = (HttpURLConnection) url.openConnection ();
 
-                String line = "";
+				connection.connect ();
 
-                while ((line = reader.readLine ()) != null) {
-                    for (String keyword: line.split ("")) {
-                        linkedList.add (keyword);
-                    }
-                }
+				if (connection.getResponseCode () == HttpURLConnection.HTTP_OK) {
+					bitmap = BitmapFactory.decodeStream (connection.getInputStream ());
+				}
+			} catch (IOException e) {
+				e.printStackTrace ();
+			} finally {
+				if (connection != null) {
+					connection.disconnect ();
+				}
+			}
 
-                return linkedList;
-            } catch (MalformedURLException e) {
-                e.printStackTrace ();
-            } catch (IOException e) {
-                e.printStackTrace ();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect ();
-                }
+			return null;
+		}
 
-                if (reader != null) {
-                    try {
-                        reader.close ();
-                    } catch (IOException e) {
-                        e.printStackTrace ();
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute (LinkedList<String> result) {
-            if (result != null) {
-                handleData (result);
-            } else {
-                Log.d ("demo", "null result");
-            }
-        }
+		@Override
+		protected void onPostExecute (Void aVoid) {
+			if (bitmap != null && imageView != null) {
+				imageView.setImageBitmap (bitmap);
+			}
+		}
     }
 
     private class GetDataKeywordAsync extends AsyncTask <String, Void, LinkedList<String>> {
@@ -169,14 +163,8 @@ public class MainActivity extends AppCompatActivity {
                 String line = "";
 
                 while ((line = reader.readLine ()) != null) {
-                    for (String keyword: line.split (";")) {
-                        linkedList.add (keyword);
-                    }
+                    linkedList.addAll (Arrays.asList (line.split (";")));
                 }
-                
-                return linkedList;
-            } catch (MalformedURLException e) {
-                e.printStackTrace ();
             } catch (IOException e) {
                 e.printStackTrace ();
             } finally {
@@ -193,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            return null;
+            return linkedList;
         }
 
         @Override
@@ -205,4 +193,69 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+	private class GetDataParamsUsingGetAsync extends AsyncTask <String, Void, LinkedList<String>> {
+		RequestParams mParams;
+
+		public GetDataParamsUsingGetAsync (RequestParams params) {
+			mParams = params;
+		}
+
+		@Override
+		protected LinkedList<String> doInBackground (String... params) {
+			LinkedList<String> result = new LinkedList<> ();
+
+			HttpURLConnection connection = null;
+
+			BufferedReader reader = null;
+
+			try {
+				URL url = new URL (mParams.getEncodedUrl (params[0]));
+				connection = (HttpURLConnection) url.openConnection ();
+
+				connection.connect ();
+
+				if (connection.getResponseCode () == HttpURLConnection.HTTP_OK) {
+					reader = new BufferedReader (new InputStreamReader (connection.getInputStream ()));
+
+					String line = "";
+
+					while ((line = reader.readLine ()) != null) {
+						result.addAll (Arrays.asList (line.split ("\r\n")));
+					}
+				}
+			} catch (IOException e) {
+				e.printStackTrace ();
+			} finally {
+				if (connection != null) {
+					connection.disconnect ();
+				}
+
+				if (reader != null) {
+					try {
+						reader.close ();
+					} catch (IOException e) {
+						e.printStackTrace ();
+					}
+				}
+			}
+
+			return result;
+		}
+
+		@Override
+		protected void onPostExecute (LinkedList<String> result) {
+			if (result != null) {
+				imageLinks.addAll (result);
+
+				for (String r: imageLinks) {
+					Log.d ("demo", r);
+				}
+
+				//new GetDataPicLinkAsync (imageView).execute (imageLinks.get (0));
+			} else {
+				String str = "Null Result";
+			}
+		}
+	}
 }
