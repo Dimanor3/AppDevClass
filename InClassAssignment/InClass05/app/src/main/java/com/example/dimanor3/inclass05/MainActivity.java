@@ -1,3 +1,9 @@
+/*
+* Assignment#: InClass05
+* File Name: MainActivity.java
+* Full Name: Bijan Razavi, Kushal Tiwari
+* */
+
 package com.example.dimanor3.inclass05;
 
 import android.content.Context;
@@ -23,11 +29,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
 
+        /*
         if (isConnected ()) {
             new GetDataAsync ().execute ();
         } else {
             Toast.makeText (MainActivity.this, "No Internet Connection!", Toast.LENGTH_SHORT).show ();
         }
+        */
     }
 
     private boolean isConnected () {
