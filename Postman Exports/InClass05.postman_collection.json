@@ -1,0 +1,58 @@
+{
+	"info": {
+		"name": "InClass05",
+		"_postman_id": "df42493d-5722-4209-1a4d-76bcc920757d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": " http://dev.theappsdr.com/apis/photos/keywords.php",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://dev.theappsdr.com/apis/photos/keywords.php",
+					"protocol": "http",
+					"host": [
+						"dev",
+						"theappsdr",
+						"com"
+					],
+					"path": [
+						"apis",
+						"photos",
+						"keywords.php"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://dev.theappsdr.com/apis/photos/index.php",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://dev.theappsdr.com/apis/photos/index.php",
+					"protocol": "http",
+					"host": [
+						"dev",
+						"theappsdr",
+						"com"
+					],
+					"path": [
+						"apis",
+						"photos",
+						"index.php"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

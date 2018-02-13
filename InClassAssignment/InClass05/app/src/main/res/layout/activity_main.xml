@@ -7,54 +7,53 @@
     android:layout_height="match_parent"
     tools:context="com.example.dimanor3.inclass05.MainActivity">
 
-    <EditText
-        android:id="@+id/keyword"
-        android:layout_width="238dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="328dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/keyWord"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/back"
-        app:layout_constraintEnd_toStartOf="@+id/go"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
-        android:id="@+id/go"
+        android:id="@+id/goButton"
         android:layout_width="89dp"
         android:layout_height="57dp"
-        android:layout_marginBottom="328dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:onClick="go"
         android:text="@string/go"
-        app:layout_constraintBottom_toTopOf="@+id/forward"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
-        android:id="@+id/back"
+        android:id="@+id/previousButton"
         android:layout_width="104dp"
         android:layout_height="98dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="144dp"
         android:layout_marginStart="16dp"
+        android:onClick="previous"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/forward"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/prev" />
+        app:srcCompat="@drawable/prev"/>
 
     <ImageView
-        android:id="@+id/forward"
+        android:id="@+id/forwardButton"
         android:layout_width="104dp"
         android:layout_height="98dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
+        android:onClick="next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/next" />
+
+    <TextView
+        android:id="@+id/searchKeywordTextView"
+        android:layout_width="233dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/keyWord"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/goButton"
+        app:layout_constraintHorizontal_bias="0.766"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
