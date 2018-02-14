@@ -6,6 +6,7 @@
 
 package com.example.dimanor3.inclass05;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
@@ -21,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
             curImg = 0;
 
-            new GetDataKeywordAsync ().execute ("http://dev.theappsdr.com/apis/photos/keywords.php");
+            new GetDataKeywordAsync (MainActivity.this).execute ("http://dev.theappsdr.com/apis/photos/keywords.php");
         } else {
             Toast.makeText (MainActivity.this, "No Internet Connection!", Toast.LENGTH_SHORT).show ();
         }
@@ -75,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
         if (curImg > 0) {
             curImg--;
 
-            new GetDataPicLinkAsync (imageView).execute (imageLinks.get (curImg));
+            new GetDataPicLinkAsync (imageView, MainActivity.this).execute (imageLinks.get (curImg));
         } else {
             curImg = imageLinks.size () - 1;
 
-            new GetDataPicLinkAsync (imageView).execute (imageLinks.get (curImg));
+            new GetDataPicLinkAsync (imageView, MainActivity.this).execute (imageLinks.get (curImg));
         }
 
         imgOfTxt = Integer.toString (curImg + 1) + " of " + imageLinks.size ();
@@ -91,11 +93,11 @@ public class MainActivity extends AppCompatActivity {
         if (curImg < imageLinks.size () - 1) {
             curImg++;
 
-            new GetDataPicLinkAsync (imageView).execute (imageLinks.get (curImg));
+            new GetDataPicLinkAsync (imageView, MainActivity.this).execute (imageLinks.get (curImg));
         } else {
             curImg = 0;
 
-            new GetDataPicLinkAsync (imageView).execute (imageLinks.get (curImg));
+            new GetDataPicLinkAsync (imageView, MainActivity.this).execute (imageLinks.get (curImg));
         }
 
         imgOfTxt = Integer.toString (curImg + 1) + " of " + imageLinks.size ();
@@ -142,9 +144,18 @@ public class MainActivity extends AppCompatActivity {
 
 		Bitmap bitmap = null;
 
-		public GetDataPicLinkAsync (ImageView imageView) {
+        private ProgressDialog dialog;
+
+        public GetDataPicLinkAsync (ImageView imageView, MainActivity activity) {
 			this.imageView = imageView;
-		}
+            dialog = new ProgressDialog (activity);
+        }
+
+        @Override
+        protected void onPreExecute () {
+            dialog.setMessage ("Loading Photo ...");
+            dialog.show ();
+        }
 
 		@Override
 		protected Void doInBackground (String... params) {
@@ -177,15 +188,31 @@ public class MainActivity extends AppCompatActivity {
 			if (bitmap != null && imageView != null) {
 				imageView.setImageBitmap (bitmap);
 			}
+
+            if (dialog.isShowing ()) {
+                dialog.dismiss ();
+            }
 		}
     }
 
     private class GetDataKeywordAsync extends AsyncTask <String, Void, LinkedList<String>> {
+        private ProgressDialog dialog;
+
         BufferedReader reader = null;
         
         LinkedList<String> linkedList = new LinkedList<String> ();
 
         HttpURLConnection connection = null;
+
+        public GetDataKeywordAsync (MainActivity activity) {
+            dialog = new ProgressDialog (activity);
+        }
+
+        @Override
+        protected void onPreExecute () {
+            dialog.setMessage ("Loading Dictionary ...");
+            dialog.show ();
+        }
 
         @Override
         protected LinkedList<String> doInBackground (String... params) {
@@ -226,6 +253,10 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText (MainActivity.this, "No Images Found!", Toast.LENGTH_SHORT).show ();
                 Log.d ("demo", "null result");
+            }
+
+            if (dialog.isShowing ()) {
+                dialog.dismiss ();
             }
         }
     }
@@ -293,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
 
                 imageOf.setText (imgOfTxt);
 
-                new GetDataPicLinkAsync (imageView).execute (imageLinks.get (0));
+                new GetDataPicLinkAsync (imageView, MainActivity.this).execute (imageLinks.get (0));
 
                 if (imageLinks == null || imageLinks.size () <= 1) {
                     setClickable (false);
