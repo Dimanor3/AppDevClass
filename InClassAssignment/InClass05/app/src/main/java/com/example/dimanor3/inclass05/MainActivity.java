@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
     RequestParams params = new RequestParams ();
 
-    TextView searchKeyword;
-    String newText = "";
+    TextView searchKeyword, imageOf;
+    String newText = "", imgOfTxt = "";
 
     ImageView imageView;
 
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         imageLinks = new LinkedList<> ();
         previous = (ImageButton) findViewById (R.id.previousButton);
         forward = (ImageButton) findViewById (R.id.forwardButton);
+        imageOf = (TextView) findViewById (R.id.imageOf);
     }
 
     public void go (View v) {
@@ -87,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
             new GetDataPicLinkAsync (imageView).execute (imageLinks.get (curImg));
         }
+
+        imgOfTxt = Integer.toString (curImg + 1) + " of " + imageLinks.size ();
+
+        imageOf.setText (imgOfTxt);
     }
 
     public void next (View v) {
@@ -99,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
 
             new GetDataPicLinkAsync (imageView).execute (imageLinks.get (curImg));
         }
+
+        imgOfTxt = Integer.toString (curImg + 1) + " of " + imageLinks.size ();
+
+        imageOf.setText (imgOfTxt);
     }
 
     public void handleData (LinkedList<String> data) {
@@ -286,6 +295,10 @@ public class MainActivity extends AppCompatActivity {
 				}
 
 				String temp = imageLinks.get (0);
+
+                imgOfTxt = Integer.toString (curImg + 1) + " of " + imageLinks.size ();
+
+                imageOf.setText (imgOfTxt);
 
                 new GetDataPicLinkAsync (imageView).execute (imageLinks.get (0));
 			} else {
