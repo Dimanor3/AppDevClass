@@ -66,13 +66,6 @@ public class MainActivity extends AppCompatActivity {
             curImg = 0;
 
             new GetDataKeywordAsync ().execute ("http://dev.theappsdr.com/apis/photos/keywords.php");
-
-            if (imageLinks == null || imageLinks.size () <= 1) {
-                setClickable (false);
-                Log.d ("demo", "There are 0 or 1 images.");
-            } else {
-                setClickable (true);
-            }
         } else {
             Toast.makeText (MainActivity.this, "No Internet Connection!", Toast.LENGTH_SHORT).show ();
         }
@@ -95,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void next (View v) {
-        if (curImg < imageLinks.size ()) {
+        if (curImg < imageLinks.size () - 1) {
             curImg++;
 
             new GetDataPicLinkAsync (imageView).execute (imageLinks.get (curImg));
@@ -301,6 +294,13 @@ public class MainActivity extends AppCompatActivity {
                 imageOf.setText (imgOfTxt);
 
                 new GetDataPicLinkAsync (imageView).execute (imageLinks.get (0));
+
+                if (imageLinks == null || imageLinks.size () <= 1) {
+                    setClickable (false);
+                    Log.d ("demo", "There are 0 or 1 images.");
+                } else {
+                    setClickable (true);
+                }
 			} else {
 				String str = "Null Result";
 			}
