@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -18,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,14 +28,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
     LinkedList<String> data, imageLinks;
+
+    ImageButton previous, forward;
+
+    int curImg = 0;
 
     RequestParams params = new RequestParams ();
 
@@ -49,22 +53,52 @@ public class MainActivity extends AppCompatActivity {
 
         searchKeyword = (TextView) findViewById (R.id.searchKeywordTextView);
         imageView = (ImageView) findViewById (R.id.imageView);
+        imageLinks = new LinkedList<> ();
+        previous = (ImageButton) findViewById (R.id.previousButton);
+        forward = (ImageButton) findViewById (R.id.forwardButton);
     }
 
     public void go (View v) {
         if (isConnected ()) {
+            imageLinks.clear ();
+
+            curImg = 0;
+
             new GetDataKeywordAsync ().execute ("http://dev.theappsdr.com/apis/photos/keywords.php");
+
+            if (imageLinks == null || imageLinks.size () <= 1) {
+                setClickable (false);
+                Log.d ("demo", "There are 0 or 1 images.");
+            } else {
+                setClickable (true);
+            }
         } else {
             Toast.makeText (MainActivity.this, "No Internet Connection!", Toast.LENGTH_SHORT).show ();
         }
     }
 
     public void previous (View v) {
+        if (curImg > 0) {
+            curImg--;
 
+            new GetDataPicLinkAsync (imageView).execute (imageLinks.get (curImg));
+        } else {
+            curImg = imageLinks.size () - 1;
+
+            new GetDataPicLinkAsync (imageView).execute (imageLinks.get (curImg));
+        }
     }
 
     public void next (View v) {
+        if (curImg < imageLinks.size ()) {
+            curImg++;
 
+            new GetDataPicLinkAsync (imageView).execute (imageLinks.get (curImg));
+        } else {
+            curImg = 0;
+
+            new GetDataPicLinkAsync (imageView).execute (imageLinks.get (curImg));
+        }
     }
 
     public void handleData (LinkedList<String> data) {
@@ -114,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
 		protected Void doInBackground (String... params) {
 			HttpURLConnection connection = null;
 
-			// Bitmap image = null;
 			bitmap = null;
 
 			try {
@@ -189,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
             if (result != null) {
                 handleData (result);
             } else {
+                Toast.makeText (MainActivity.this, "No Images Found!", Toast.LENGTH_SHORT).show ();
                 Log.d ("demo", "null result");
             }
         }
@@ -246,16 +280,22 @@ public class MainActivity extends AppCompatActivity {
 		@Override
 		protected void onPostExecute (LinkedList<String> result) {
 			if (result != null) {
-				imageLinks.addAll (result);
-
-				for (String r: imageLinks) {
-					Log.d ("demo", r);
+				for (String r: result) {
+					imageLinks.add (r);
+                    Log.d ("demo", r);
 				}
 
-				//new GetDataPicLinkAsync (imageView).execute (imageLinks.get (0));
+				String temp = imageLinks.get (0);
+
+                new GetDataPicLinkAsync (imageView).execute (imageLinks.get (0));
 			} else {
 				String str = "Null Result";
 			}
 		}
 	}
+
+    private void setClickable (boolean set) {
+        previous.setClickable (set);
+        forward.setClickable (set);
+    }
 }
