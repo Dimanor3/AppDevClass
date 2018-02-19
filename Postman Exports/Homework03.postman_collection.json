@@ -1,0 +1,34 @@
+{
+	"info": {
+		"name": "Homework03",
+		"_postman_id": "cbdd1e9e-feb5-9708-70d6-994b7e1ca9e6",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://dev.theappsdr.com/apis/trivia_json/trivia_text.php",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://dev.theappsdr.com/apis/trivia_json/trivia_text.php",
+					"protocol": "http",
+					"host": [
+						"dev",
+						"theappsdr",
+						"com"
+					],
+					"path": [
+						"apis",
+						"trivia_json",
+						"trivia_text.php"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
