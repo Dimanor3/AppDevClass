@@ -1,3 +1,9 @@
+/*
+* Assignment#: InClass06
+* File Name: Articles.java
+* Full Name: Bijan Razavi, Kushal Tiwari, Ryan Haines, Sonia Alcantara Tuscano
+* */
+
 package com.example.dimanor3.inclass06;
 
 import java.io.Serializable;

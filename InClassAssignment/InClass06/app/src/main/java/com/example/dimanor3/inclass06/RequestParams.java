@@ -1,7 +1,7 @@
 /*
 * Assignment#: InClass06
 * File Name: RequestParams.java
-* Full Name: Bijan Razavi, Kushal Tiwari
+* Full Name: Bijan Razavi, Kushal Tiwari, Ryan Haines, Sonia Alcantara Tuscano
 * */
 
 package com.example.dimanor3.inclass06;

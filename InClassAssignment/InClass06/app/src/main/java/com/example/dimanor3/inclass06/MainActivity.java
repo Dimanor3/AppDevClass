@@ -1,13 +1,12 @@
 /*
 * Assignment# 6
 * File Name: MainActivity.java
-* Full Name: Bijan Razavi, Kushal Tiwari
+* Full Name: Bijan Razavi, Kushal Tiwari, Ryan Haines, Sonia Alcantara Tuscano
 * */
 
 package com.example.dimanor3.inclass06;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
@@ -27,14 +26,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,12 +50,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
 
+        setClickableTo (false);
+
         go = (Button) findViewById (R.id.goButton);
         previous = (ImageButton) findViewById (R.id.previousButton);
         forward = (ImageButton) findViewById (R.id.nextButton);
 
         showCategories = (TextView) findViewById (R.id.showCategories);
-        title = (TextView) findViewById (R.id.showTitle);
+        title = (TextView) findViewById (R.id.title);
         publishedAt = (TextView) findViewById (R.id.publishedAt);
         newsDescription = (TextView) findViewById (R.id.newsDescription);
         outOf = (TextView) findViewById (R.id.outOf);
@@ -91,11 +87,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void previous (View v) {
+        if (curItem > 0) {
+            curItem--;
 
+            display (articles.get (curItem), articles.size ());
+        } else {
+        	curItem = articles.size () - 1;
+
+        	display (articles.get (curItem), articles.size ());
+		}
     }
 
     public void next (View v) {
+		if (curItem < articles.size () - 1) {
+			curItem++;
 
+			display (articles.get (curItem), articles.size ());
+		} else {
+			curItem = 0;
+
+			display (articles.get (curItem), articles.size ());
+		}
     }
 
     public void handleData (LinkedList<String> data) {
@@ -182,15 +194,13 @@ public class MainActivity extends AppCompatActivity {
             if (result != null) {
                 articles.addAll (result);
 
-                curItem = 1;
-
                 display (articles.get (0), articles.size ());
 
                 if (articles == null || articles.size () <= 1) {
-                    setClickable (false);
+                    setClickableTo (false);
                     Log.d ("demo", "There are 0 or 1 images.");
                 } else {
-                    setClickable (true);
+                    setClickableTo (true);
                 }
             } else {
                 String str = "Null Result";
@@ -204,12 +214,12 @@ public class MainActivity extends AppCompatActivity {
         publishedAt.setText (article.getPublishedAt ());
         newsDescription.setText (article.getDescription ());
 
-        String temp = Integer.toString (curItem) + " out of " + Integer.toString (size);
+        String temp = Integer.toString (curItem + 1) + " out of " + Integer.toString (size);
 
         outOf.setText (temp);
     }
 
-    private void setClickable (boolean set) {
+    private void setClickableTo (boolean set) {
         previous.setClickable (set);
         forward.setClickable (set);
     }
