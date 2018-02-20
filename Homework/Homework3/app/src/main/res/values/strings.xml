@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Group#3_HW03</string>
+    <string name="welcome">Welcome to Trivia App</string>
+    <string name="exit">Exit</string>
+    <string name="start">Start Trivia</string>
+    <string name="loading">Loading Trivia</string>
+    <string name="questionNumber">Q1</string>
+    <string name="timeLeft">Time Left: X seconds</string>
+    <string name="question">Question</string>
+    <string name="quit">Quit</string>
+    <string name="next">Next</string>
+    <string name="loadingImg">Loading Image</string>
 </resources>

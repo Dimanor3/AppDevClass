@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 
 public class Questions implements Serializable {
-    String question, picURL;
-    ArrayList<String> answerChoices = new ArrayList<> ();
-    int questionNumber, correctAnswer;
+    private String question, picURL;
+	private ArrayList<String> answerChoices = new ArrayList<> ();
+	private int questionNumber, correctAnswer;
 
     public Questions (String question, String picURL, ArrayList<String> answerChoices, int questionNumber, int correctAnswer) {
 
@@ -27,23 +27,23 @@ public class Questions implements Serializable {
         this.correctAnswer = correctAnswer;
     }
 
-    public void setQuestion (String question) {
-        this.question = question;
+    public String getQuestion () {
+        return question;
     }
 
-    public void setPicURL (String picURL) {
-        this.picURL = picURL;
+    public String getPicURL () {
+        return picURL;
     }
 
-    public void setAnswerChoices (ArrayList<String> answerChoices) {
-        this.answerChoices = answerChoices;
+    public ArrayList<String> getAnswerChoices () {
+        return answerChoices;
     }
 
-    public void setQuestionNumber (int questionNumber) {
-        this.questionNumber = questionNumber;
+    public int getQuestionNumber () {
+        return questionNumber;
     }
 
-    public void setCorrectAnswer (int correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public int getCorrectAnswer () {
+        return correctAnswer;
     }
 }
