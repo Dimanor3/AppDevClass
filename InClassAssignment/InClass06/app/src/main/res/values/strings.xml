@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">InClass06</string>
+    <string name="showCategories">Show Categories</string>
+    <string name="go">Go</string>
+    <string name="zeroOfZero">0 out of 0</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="publishedAt">Published At</string>
+    <string name="newsDescription">News Description</string>
 </resources>
