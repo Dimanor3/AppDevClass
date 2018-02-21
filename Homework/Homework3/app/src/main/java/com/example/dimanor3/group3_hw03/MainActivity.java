@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
 			LinkedList<Questions> questionsLinkedList = new LinkedList<> ();
 
 			String question = "", picURL = "";
-			ArrayList<String> answerChoices = new ArrayList<> ();
 			int questionNumber = -1, correctAnswer = -1;
 
 			HttpURLConnection connection = null;
@@ -123,15 +122,21 @@ public class MainActivity extends AppCompatActivity {
 
 							picURL = parts.get (2);
 
-							Log.d ("t", line);
+							Log.d ("t", question);
 
-							for (int i = 3; i < parts.size () - 2; i++) {
+							ArrayList<String> answerChoices = new ArrayList<> ();
+
+							for (int i = 3; i < parts.size () - 1; i++) {
 								answerChoices.add (parts.get (i));
 							}
 
 							correctAnswer = Integer.parseInt (parts.get (parts.size () - 1));
 
-							questionsLinkedList.add (new Questions (question, picURL, answerChoices, questionNumber, correctAnswer));
+							Questions q = new Questions (question, picURL, answerChoices, questionNumber, correctAnswer);
+
+							questionsLinkedList.add (q);
+
+							parts.clear ();
 						}
 					}
 				}

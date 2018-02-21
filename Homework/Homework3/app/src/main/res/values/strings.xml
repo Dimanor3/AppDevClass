@@ -10,4 +10,9 @@
     <string name="quit">Quit</string>
     <string name="next">Next</string>
     <string name="loadingImg">Loading Image</string>
+    <string name="triviaStats">Trivia Stats</string>
+    <string name="correctAnswers">Correct Answers</string>
+    <string name="percentage">0%</string>
+    <string name="tryAgain">Try again and see if you can get all the correct answers!</string>
+    <string name="tryAgain2">Try Again</string>
 </resources>

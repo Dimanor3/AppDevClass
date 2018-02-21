@@ -1,3 +1,9 @@
+/*
+ * Assignment# 3
+ * File Name: TriviaActivity.java
+ * Full Name: Bijan Razavi, Kushal Tiwari
+ */
+
 package com.example.dimanor3.group3_hw03;
 
 import android.content.Context;
@@ -13,6 +19,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,13 +28,18 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class TriviaActivity extends AppCompatActivity {
 	TextView questionNumber, timeLeft, question, loading;
 	ProgressBar progressBar;
 	ImageView imageView;
 	ArrayList<Questions> questions;
-	int correctAnswer = -1, answersCorrect = 0, totalQuestions = -1, currentQuestion = 0;
+	RadioGroup radioGroup;
+	int correctAnswer = -1, answersCorrect = 0, totalQuestions = -1;
+	private int currentQuestion = 0;
+
+	public static String STATS_KEY = "STATS";
 
 	String link = "", temp = "";
 
@@ -44,6 +57,8 @@ public class TriviaActivity extends AppCompatActivity {
 
 		progressBar = (ProgressBar) findViewById (R.id.progressBar2);
 
+		radioGroup = (RadioGroup) findViewById (R.id.radioGroup);
+
 		questions = new ArrayList<> ();
 
 		if (getIntent () != null && getIntent ().getExtras () != null) {
@@ -60,7 +75,32 @@ public class TriviaActivity extends AppCompatActivity {
 
 		link = questions.get (currentQuestion).getPicURL ();
 
-		currentQuestion++;
+		displayChoices (questions.get (currentQuestion).getAnswerChoices ());
+
+		radioGroup.setOnCheckedChangeListener (new RadioGroup.OnCheckedChangeListener () {
+			int j = answersCorrect;
+
+			@Override
+			public void onCheckedChanged (RadioGroup radioGroup, int i) {
+				currentQuestion = 0;
+
+				RadioButton rB = (RadioButton) findViewById (radioGroup.getCheckedRadioButtonId ());
+
+				Log.d ("okjweoip", rB.getText ().toString () + " " + Integer.toString (currentQuestion) + " " + questions.get (currentQuestion).getAnswerChoices ().get (correctAnswer));
+
+				if (rB.getText ().toString ().contains (questions.get (currentQuestion).getAnswerChoices ().get (correctAnswer)) && answersCorrect == j) {
+					Log.d ("jsdfjk", "I work!");
+					answersCorrect++;
+				}
+
+				if (!rB.getText ().toString ().contains (questions.get (currentQuestion).getAnswerChoices ().get (correctAnswer)) && answersCorrect > j) {
+					Log.d ("jsdfjk", "So do I!");
+					answersCorrect--;
+				}
+			}
+		});
+
+		currentQuestion = 1;
 
 		if (isConnected ()) {
 			if (!"".contains (link) || link != null) {
@@ -78,7 +118,11 @@ public class TriviaActivity extends AppCompatActivity {
 	}
 
 	public void nextQuestion (View v) {
-		Log.d ("test", questions.get (5).getQuestion ());
+		if (currentQuestion == 0) {
+			currentQuestion = 1;
+		}
+
+		clearDisplayChoices ();
 
 		if (currentQuestion < totalQuestions) {
 			temp = Integer.toString (questions.get (currentQuestion).getQuestionNumber () + 1);
@@ -89,6 +133,31 @@ public class TriviaActivity extends AppCompatActivity {
 
 			link = questions.get (currentQuestion).getPicURL ();
 
+			displayChoices (questions.get (currentQuestion).getAnswerChoices ());
+
+			Log.d ("ipweoi", Integer.toString (currentQuestion));
+
+			radioGroup.setOnCheckedChangeListener (new RadioGroup.OnCheckedChangeListener () {
+				int j = answersCorrect;
+
+				@Override
+				public void onCheckedChanged (RadioGroup radioGroup, int i) {
+					RadioButton rB = (RadioButton) findViewById (radioGroup.getCheckedRadioButtonId ());
+
+					Log.d ("okjweoip", rB.getText ().toString () + " " + Integer.toString (currentQuestion) + " " + questions.get (currentQuestion).getAnswerChoices ().get (correctAnswer));
+
+					if (rB.getText ().toString ().contains (questions.get (currentQuestion).getAnswerChoices ().get (correctAnswer)) && answersCorrect == j) {
+						Log.d ("jsdfjk", "I work!");
+						answersCorrect++;
+					}
+
+					if (!rB.getText ().toString ().contains (questions.get (currentQuestion).getAnswerChoices ().get (correctAnswer)) && answersCorrect > j) {
+						Log.d ("jsdfjk", "So do I!");
+						answersCorrect--;
+					}
+				}
+			});
+
 			if (isConnected ()) {
 				if (!"".contains (link) || link != null) {
 					new TriviaActivity.GetDataPicLinkAsync (imageView).execute (link);
@@ -98,6 +167,8 @@ public class TriviaActivity extends AppCompatActivity {
 			}
 
 			currentQuestion++;
+		} else {
+			stats ();
 		}
 	}
 
@@ -171,5 +242,29 @@ public class TriviaActivity extends AppCompatActivity {
 			progressBar.setVisibility (View.INVISIBLE);
 			loading.setVisibility (View.INVISIBLE);
 		}
+	}
+	int test = 0;
+	private void displayChoices (ArrayList<String> answerChoices) {
+		RadioButton radioButton;
+
+		for (String aC: answerChoices) {
+			radioButton = new RadioButton (this);
+			radioGroup.addView (radioButton);
+			radioButton.setText (aC);
+		}
+
+		test++;
+	}
+
+	private void clearDisplayChoices () {
+		radioGroup.removeAllViews ();
+	}
+
+	private void stats () {
+		Intent intent = new Intent (TriviaActivity.this, Stats.class);
+
+		intent.putExtra (STATS_KEY, answersCorrect);
+
+		startActivity (intent);
 	}
 }
