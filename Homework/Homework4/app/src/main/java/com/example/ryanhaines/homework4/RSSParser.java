@@ -33,8 +33,9 @@ public class RSSParser {
 			ArrayList<Headlines> headlines = new ArrayList<> ();
 			Headlines headline = null;
 			XmlPullParserFactory factory = XmlPullParserFactory.newInstance ();
-			factory.setNamespaceAware (true);
+			//factory.setNamespaceAware (true);
 			XmlPullParser parser = factory.newPullParser ();
+
 			parser.setInput (inputStream, "UTF-8");
 			//String test = parser.nextText ().trim ();
 
@@ -44,9 +45,9 @@ public class RSSParser {
 			Log.d ("value", String.valueOf (event));
 			Log.d ("enddoc", String.valueOf (XmlPullParser.END_DOCUMENT));
 
-			while (event == XmlPullParser.END_DOCUMENT) {
+			while (event != XmlPullParser.END_DOCUMENT) {
 				switch (event) {
-					case XmlPullParser.START_TAG:
+					case XmlPullParser.START_DOCUMENT:
 						Log.d ("demo", "Hello");
 						if (parser.getName ().equals ("item")) {
 							headline = new Headlines ();
@@ -59,11 +60,13 @@ public class RSSParser {
 						} else if (parser.getName ().equals ("pubDate")) {
 							headline.datePublished = parser.nextText ().trim ();
 						}
+
 						break;
 					case XmlPullParser.END_TAG:
 						if (parser.getName ().equals ("item")) {
 							headlines.add (headline);
 						}
+
 						break;
 					default:
 						Log.d ("demo", "Howdy");
@@ -71,6 +74,8 @@ public class RSSParser {
 				}
 
 				event = parser.next ();
+
+				Log.d ("valueIn", String.valueOf (event));
 			}
 
 			return headlines;
