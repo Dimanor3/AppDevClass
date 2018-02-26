@@ -12,7 +12,7 @@ import java.io.Serializable;
  * Created by ryanhaines on 2/21/18.
  */
 
-public class Headlines implements Serializable {
+public class Headlines {
 
 	String title;
 	String datePublished;
@@ -21,7 +21,6 @@ public class Headlines implements Serializable {
 	String newsLink;
 
 	public Headlines () {
-
 	}
 
 	public Headlines (String title, String datePublished, String imageURL, String description, String newsLink) {

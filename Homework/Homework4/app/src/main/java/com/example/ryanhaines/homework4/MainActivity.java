@@ -63,17 +63,17 @@ public class MainActivity extends AppCompatActivity {
 
 		setButtonEnabled (false);
 
-		categories.add ("Top Stories");
-		categories.add ("World");
-		categories.add ("U.S.");
-		categories.add ("Business");
-		categories.add ("Politics");
-		categories.add ("Technology");
-		categories.add ("Health");
-		categories.add ("Entertainment");
-		categories.add ("Travel");
-		categories.add ("Living");
-		categories.add ("Most Recent");
+        categories.add ("Top Stories");
+        categories.add ("World");
+        categories.add ("U.S.");
+        categories.add ("Business");
+        categories.add ("Politics");
+        categories.add ("Technology");
+        categories.add ("Health");
+        categories.add ("Entertainment");
+        categories.add ("Travel");
+        categories.add ("Living");
+        categories.add ("Most Recent");
 
 		backBtn.setOnClickListener (new View.OnClickListener () {
 			@Override
@@ -195,18 +195,16 @@ public class MainActivity extends AppCompatActivity {
 			HttpURLConnection connection = null;
 			ArrayList<Headlines> result = new ArrayList<> ();
 
-			Log.d ("demo", "Connection Right before");
-
 			try {
 				URL url = new URL (params[0]);
 				connection = (HttpURLConnection) url.openConnection ();
 				connection.connect ();
 				if (connection.getResponseCode () == HttpURLConnection.HTTP_OK) {
 					String json = IOUtils.toString (connection.getInputStream (), "UTF8");
-					Log.d ("demo", "Connection Made");
+					Log.d ("connection", "Connection Made");
 					result = RSSParser.RSSPullParser.parseHeadline (connection.getInputStream ());
 				} else {
-					Log.d ("demo", "Connection Failed");
+					Log.d ("connection", "Connection Failed");
 				}
 			} catch (XmlPullParserException | IOException e) {
 				e.printStackTrace ();
@@ -222,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
 		@Override
 		protected void onPostExecute (ArrayList<Headlines> result) {
 			if (result.size () > 0) {
-				Log.d ("demo", result.toString ());
+				Log.d ("result", result.toString ());
 
 				newsItems.clear ();
 				newsItems.addAll (result);
@@ -238,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 				}
 
 			} else {
-				Log.d ("demo", "empty result");
+				Log.d ("result", "empty result");
 			}
 		}
 	}

@@ -36,11 +36,14 @@ public class RSSParser {
 			factory.setNamespaceAware (true);
 			XmlPullParser parser = factory.newPullParser ();
 			parser.setInput (inputStream, "UTF-8");
-			String test = parser.nextText ().trim ();
-			Log.d ("demo", test);
-			int event = parser.getEventType ();
+			//String test = parser.nextText ().trim ();
 
-			Log.d ("demo", String.valueOf (event));
+			//Log.d ("test", test);
+
+			int event = parser.getEventType ();
+			Log.d ("value", String.valueOf (event));
+			Log.d ("enddoc", String.valueOf (XmlPullParser.END_DOCUMENT));
+
 			while (event == XmlPullParser.END_DOCUMENT) {
 				switch (event) {
 					case XmlPullParser.START_TAG:
