@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
 	TextView categoryText, titleText, dateText, descriptionText, indexText;
 	LinkedList<String> categories = new LinkedList<> ();
 	ArrayList<Headlines> newsItems = new ArrayList<> ();
+
+	ProgressBar progressBar;
+
 	int index = 0;
 
 
@@ -63,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
 		dateText = findViewById (R.id.dateText);
 		descriptionText = findViewById (R.id.descriptionText);
 		indexText = findViewById (R.id.indexText);
+
+		progressBar = (ProgressBar) findViewById (R.id.progressBar);
+		progressBar.setVisibility (View.INVISIBLE);
 
 		setButtonEnabled (false);
 
@@ -259,7 +266,9 @@ public class MainActivity extends AppCompatActivity {
 
 		String articlesString = indexString + " out of " + Integer.toString (newArticleSize);
 		indexText.setText (articlesString);
+		progressBar.setVisibility (View.VISIBLE);
 		Picasso.with (MainActivity.this).load (item.imageURL).into (imageButton);
+		progressBar.setVisibility (View.INVISIBLE);
 
 		imageButton.setOnClickListener(new View.OnClickListener() {
 			@Override

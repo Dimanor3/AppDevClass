@@ -131,7 +131,7 @@ public class Category extends AppCompatActivity {
 
 	private void setupListView (int size) {
 		ImageView imageView;
-		
+
 
 		for (int i = 0; i < size; i++) {
 
