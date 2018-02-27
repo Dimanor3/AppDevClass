@@ -9,6 +9,7 @@ package com.example.ryanhaines.homework4;
 import android.util.Log;
 import android.util.Xml;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.XmlStreamReader;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -21,6 +22,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -33,43 +36,43 @@ public class RSSParser {
 			ArrayList<Headlines> headlines = new ArrayList<> ();
 			Headlines headline = null;
 			XmlPullParserFactory factory = XmlPullParserFactory.newInstance ();
-			factory.setNamespaceAware (true);
 			XmlPullParser parser = factory.newPullParser ();
 			parser.setInput (inputStream, "UTF-8");
-			//String test = parser.nextText ().trim ();
 
-			//Log.d ("test", test);
 
 			int event = parser.getEventType ();
-			Log.d ("value", String.valueOf (event));
-			Log.d ("enddoc", String.valueOf (XmlPullParser.END_DOCUMENT));
 
-			while (event == XmlPullParser.END_DOCUMENT) {
+
+			while (event != XmlPullParser.END_DOCUMENT) {
 				switch (event) {
+					case XmlPullParser.START_DOCUMENT:
+						Log.d("demo","Document Started");
+						break;
 					case XmlPullParser.START_TAG:
-						Log.d ("demo", "Hello");
-						if (parser.getName ().equals ("item")) {
+						if (parser.getName().equals ("item")) {
 							headline = new Headlines ();
-						} else if (parser.getName ().equals ("title")) {
+						} else if (headline != null && parser.getName().equals ("title")) {
 							headline.title = parser.nextText ().trim ();
-						} else if (parser.getName ().equals ("description")) {
-							headline.description = parser.nextText ().trim ();
-						} else if (parser.getName ().equals ("link")) {
+						} else if (headline != null && parser.getName().equals ("description")) {
+							headline.description = parser.nextText().trim();
+							headline.description = headline.description.split("<")[0];
+						}else if (headline != null && parser.getName().equals ("media:content")) {
+							headline.imageURL = parser.getAttributeValue(null, "url");
+						} else if (headline != null && parser.getName().equals ("feedburner:origLink")) {
 							headline.newsLink = parser.nextText ().trim ();
-						} else if (parser.getName ().equals ("pubDate")) {
+						} else if (headline != null && parser.getName().equals ("pubDate")) {
 							headline.datePublished = parser.nextText ().trim ();
 						}
 						break;
 					case XmlPullParser.END_TAG:
 						if (parser.getName ().equals ("item")) {
 							headlines.add (headline);
+							headline = null;
 						}
 						break;
 					default:
-						Log.d ("demo", "Howdy");
 						break;
 				}
-
 				event = parser.next ();
 			}
 

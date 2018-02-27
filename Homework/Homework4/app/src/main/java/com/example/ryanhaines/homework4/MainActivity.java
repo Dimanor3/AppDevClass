@@ -9,8 +9,10 @@ package com.example.ryanhaines.homework4;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
@@ -34,10 +36,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import static android.content.Intent.ACTION_VIEW;
+
 public class MainActivity extends AppCompatActivity {
 	ImageButton nextBtn, backBtn;
 	Button goBtn;
-	ImageView imageViewer;
+	ImageButton imageButton;
 	TextView categoryText, titleText, dateText, descriptionText, indexText;
 	LinkedList<String> categories = new LinkedList<> ();
 	ArrayList<Headlines> newsItems = new ArrayList<> ();
@@ -53,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
 		backBtn = findViewById (R.id.backBtn);
 		goBtn = findViewById (R.id.goBtn);
 
-		imageViewer = findViewById (R.id.imageView);
-
+		imageButton = findViewById (R.id.imageButton);
 		categoryText = findViewById (R.id.categorieText);
 		titleText = findViewById (R.id.titleText);
 		dateText = findViewById (R.id.dateText);
@@ -81,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
 			if (index == 0) {
 				index = newsItems.size () - 1;
 				showItem (newsItems.get (index));
-
 			} else {
 				index--;
 				showItem (newsItems.get (index));
@@ -172,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
 		}); else {
 			Toast.makeText (getApplicationContext (), "Not Connected to Network", Toast.LENGTH_LONG).show ();
 		}
+
 	}
 
 
@@ -191,6 +194,11 @@ public class MainActivity extends AppCompatActivity {
 		ProgressDialog progressDialog = new ProgressDialog (MainActivity.this);
 
 		@Override
+		protected void onPreExecute() {
+			progressDialog.show();
+		}
+
+		@Override
 		protected ArrayList<Headlines> doInBackground (String... params) {
 			HttpURLConnection connection = null;
 			ArrayList<Headlines> result = new ArrayList<> ();
@@ -200,7 +208,6 @@ public class MainActivity extends AppCompatActivity {
 				connection = (HttpURLConnection) url.openConnection ();
 				connection.connect ();
 				if (connection.getResponseCode () == HttpURLConnection.HTTP_OK) {
-					String json = IOUtils.toString (connection.getInputStream (), "UTF8");
 					Log.d ("connection", "Connection Made");
 					result = RSSParser.RSSPullParser.parseHeadline (connection.getInputStream ());
 				} else {
@@ -227,12 +234,12 @@ public class MainActivity extends AppCompatActivity {
 
 				index = 0;
 
-				//progressDialog.dismiss();
+				progressDialog.dismiss();
 
 				if (newsItems.size () != 0) {
 					showItem (newsItems.get (index));
 					setButtonEnabled (true);
-					imageViewer.setVisibility (View.VISIBLE);
+					imageButton.setVisibility (View.VISIBLE);
 				}
 
 			} else {
@@ -241,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	public void showItem (Headlines item) {
+	public void showItem (final Headlines item) {
 		titleText.setText (item.title);
 		dateText.setText (item.datePublished);
 		descriptionText.setText (item.description);
@@ -252,7 +259,17 @@ public class MainActivity extends AppCompatActivity {
 
 		String articlesString = indexString + " out of " + Integer.toString (newArticleSize);
 		indexText.setText (articlesString);
-		Picasso.with (MainActivity.this).load (item.imageURL).into (imageViewer);
+		Picasso.with (MainActivity.this).load (item.imageURL).into (imageButton);
+
+		imageButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent browserAction;
+				browserAction = new Intent(ACTION_VIEW, Uri.parse(item.newsLink));
+				startActivity(browserAction);
+			}
+		});
+
 	}
 
 	private void setButtonEnabled (boolean enable) {
