@@ -1,5 +1,6 @@
 package com.example.dimanor3.inclass07;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -7,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
@@ -67,6 +69,8 @@ public class Category extends AppCompatActivity {
 	}
 
 	private class GetDataParamsUsingGetAsync extends AsyncTask<String, Void, LinkedList<Articles>> {
+		ProgressDialog progressDialog;
+
 		public GetDataParamsUsingGetAsync (Category category) {
 
 		}
@@ -114,12 +118,23 @@ public class Category extends AppCompatActivity {
 			if (result != null) {
 				articles.addAll (result);
 
+				setupListView (articles.size ());
+
 				for (Articles a: articles) {
 					Log.d ("kjsfdkld", a.toString ());
 				}
 			} else {
 				String str = "Null Result";
 			}
+		}
+	}
+
+	private void setupListView (int size) {
+		ImageView imageView;
+		
+
+		for (int i = 0; i < size; i++) {
+
 		}
 	}
 }
