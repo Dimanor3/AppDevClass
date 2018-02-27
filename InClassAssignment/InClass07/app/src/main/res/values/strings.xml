@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">InClass07</string>
+    <string name="title">Title</string>
+    <string name="publishedAt">Published At</string>
+    <string name="newsDescription">News Description</string>
 </resources>
