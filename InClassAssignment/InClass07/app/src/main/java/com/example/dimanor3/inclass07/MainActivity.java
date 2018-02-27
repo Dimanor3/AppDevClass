@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
 	String[] categories = {"business", "entertainment", "general", "health", "science", "sports", "technology"};
 
-	
+	static final String CATEGORY_KEY = "CATEGORY";
 
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
 				if (isConnected ()) {
 					String category = categories[position];
 
-					Intent intent = new Intent (MainActivity.this, Category.class);\
+					Intent intent = new Intent (MainActivity.this, Category.class);
 
-					intent.putExtra ();
+					intent.putExtra (CATEGORY_KEY, category);
 
 					startActivity (intent);
 				} else {

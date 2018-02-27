@@ -35,7 +35,11 @@ public class Category extends AppCompatActivity {
 		params.addParameter ("country", "us");
 		params.addParameter ("apikey", "615ebef4e6cc4072a1b6b9c05b020956");
 
+		if (getIntent () != null && getIntent ().getExtras () != null) {
+			category = (String) getIntent ().getExtras ().getString (MainActivity.CATEGORY_KEY);
+		}
 
+		setTitle (category);
 
 		if (isConnected ()) {
 			params.addParameter ("category", category);
