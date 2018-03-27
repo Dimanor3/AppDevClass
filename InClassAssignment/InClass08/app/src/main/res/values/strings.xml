@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">InClass08</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="strName">Name</string>
+    <string name="strEmail">Email</string>
+    <string name="strDepartment">Department:</string>
+    <string name="strSIS">SIS</string>
+    <string name="strCS">CS</string>
+    <string name="strBIO">BIO</string>
+    <string name="strOthers">Others</string>
+    <string name="strCurrentMood">Your Current Mood:</string>
+    <string name="strSubmit">Submit</string>
+    <string name="name">Name:</string>
+    <string name="studentInfo">Student Infomation</string>
+    <string name="email">Email:</string>
+    <string name="department">Department:</string>
+    <string name="mood">Mood:</string>
+    <string name="edit">Edit Information</string>
+    <string name="saveEdit">Save Edits</string>
+    <string name="strEdit">Edit</string>
 </resources>

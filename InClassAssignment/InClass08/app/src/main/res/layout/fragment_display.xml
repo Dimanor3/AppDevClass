@@ -1,0 +1,158 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.example.dimanor3.inclass08.DisplayFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="359dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="449dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/strName"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="358dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="390dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="13dp"
+            android:ems="10"
+            android:hint="@string/strEmail"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextName"/>
+
+        <TextView
+            android:id="@+id/textViewDepartment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="345dp"
+            android:layout_marginEnd="246dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/strDepartment"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextEmail"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="167dp"
+            android:layout_height="143dp"
+            android:layout_marginBottom="14dp"
+            android:layout_marginEnd="176dp"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewMood"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDepartment">
+
+            <RadioButton
+                android:id="@+id/radioSIS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="@string/strSIS"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <RadioButton
+                android:id="@+id/radioCS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/strCS"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="25dp"/>
+
+            <RadioButton
+                android:id="@+id/radioBIO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/strBIO"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="57dp"/>
+
+            <RadioButton
+                android:id="@+id/radioOthers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/strOthers"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="89dp"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textViewMood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="157dp"
+            android:layout_marginEnd="221dp"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/strCurrentMood"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup"/>
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="336dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="43dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/submitButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMood"
+            app:layout_constraintVertical_bias="0.0"/>
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="319dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="92dp"
+            android:text="@string/strSubmit"
+            android:onClick="submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMood"/>
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>
