@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">InClass11</string>
+    <string name="search">Image Search</string>
+    <string name="searchForPic">Search</string>
+    <string name="likes">Likes:</string>
+    <string name="views">Views:</string>
+    <string name="id">ID:</string>
+</resources>
