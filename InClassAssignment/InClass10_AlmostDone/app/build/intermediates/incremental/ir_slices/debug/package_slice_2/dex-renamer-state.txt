@@ -1,4 +1,4 @@
-#Fri Apr 06 14:15:48 EDT 2018
-base.0=C\:\\Users\\Dimanor3\\Desktop\\InClass10\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\2
+#Sun Apr 08 22:45:40 EDT 2018
+base.0=C\:\\Users\\Dimanor3\\Documents\\GitHub\\AppDevClass\\InClassAssignment\\InClass10_AlmostDone\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\3
 path.0=classes.dex
 renamed.0=classes.dex
