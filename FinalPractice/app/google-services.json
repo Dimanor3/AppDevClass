@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "112062493808",
+    "firebase_url": "https://finalpract-9d36f.firebaseio.com",
+    "project_id": "finalpract-9d36f",
+    "storage_bucket": "finalpract-9d36f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112062493808:android:99285b99104b4301",
+        "android_client_info": {
+          "package_name": "com.example.ryanhaines.finalpractice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112062493808-t5vc7a9e3rmmhntepreukh5ti8k878to.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSZZ1aiiyRND6W1JKrq0DqtIG8pPrPlxQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

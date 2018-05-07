@@ -4,7 +4,17 @@
             "outputFile": "C:\\Users\\Dimanor3\\Documents\\GitHub\\AppDevClass\\InClassAssignment\\InClass10_AlmostDone\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Dimanor3\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\777ba9055457e5a0aa6c3c078cb4de34\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\Dimanor3\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\14fa4100140136f3915748d0e1681c2f\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Dimanor3\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\e1edfd2404b8cada3d36675e680c847d\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -20,16 +30,6 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Dimanor3\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\76701275ad1db6191d7e74b5f56657f0\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
                     }
                 }
             ]

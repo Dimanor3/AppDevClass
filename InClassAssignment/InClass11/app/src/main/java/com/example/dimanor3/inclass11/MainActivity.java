@@ -3,6 +3,9 @@ package com.example.dimanor3.inclass11;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v4.app.FragmentManager;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -28,11 +32,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/*
-* https://developer.android.com/training/animation/screen-slide.html#viewpager
-* Add a ViewPager
-* */
-
 public class MainActivity extends AppCompatActivity {
 
 	EditText imageSearch;
@@ -40,14 +39,19 @@ public class MainActivity extends AppCompatActivity {
 	ViewPager imageView;
 	ViewPagerAdapter adapter;
 
+	private static final int NUM_PAGES = 5;
+
 	final String SEARCH_URL = "http://pixabay.com/api/?key=8642239-8fb7d5689e5263f0a69658141&q=";
 	String searchURL = SEARCH_URL;
 
 	private final OkHttpClient client = new OkHttpClient ();
 
 	LinkedList<ImageSearchItem> imageSearchItems = new LinkedList<> ();
+	LinkedList<ScreenSlidePageFragment> screenSlidePageFragments = new LinkedList<> ();
 
 	int pos = 0;
+
+	private FragmentActivity fragmentActivity;
 
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
@@ -58,11 +62,13 @@ public class MainActivity extends AppCompatActivity {
 		search = findViewById (R.id.buttonSearch);
 		imageView = findViewById (R.id.imageView);
 
+		fragmentActivity = new FragmentActivity ();
+
 		search.setOnClickListener (new View.OnClickListener () {
 			@Override
 			public void onClick (View v) {
 				if (isConnected ()) {
-					Toast.makeText (MainActivity.this,"Connected", Toast.LENGTH_SHORT).show ();
+					Toast.makeText (MainActivity.this, "Connected", Toast.LENGTH_SHORT).show ();
 
 					searchURL += imageSearch.getText ().toString ().replace (" ", "+");
 
@@ -72,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
 						e.printStackTrace ();
 					}
 
-					adapter = new ViewPagerAdapter (MainActivity.this, imageSearchItems);
-					imageView.setAdapter (adapter);
+//					adapter = new ScreenSlidePagerAdapter (getSupportFragmentManager ());
+//					imageView.setAdapter (adapter);
 
 					searchURL = SEARCH_URL;
 				} else {
-					Toast.makeText (MainActivity.this,"Not Connected", Toast.LENGTH_SHORT).show ();
+					Toast.makeText (MainActivity.this, "Not Connected", Toast.LENGTH_SHORT).show ();
 				}
 			}
 		});
@@ -134,6 +140,9 @@ public class MainActivity extends AppCompatActivity {
 									image.getInt ("likes"),
 									image.getInt ("views")
 							));
+
+							screenSlidePageFragments.add (new ScreenSlidePageFragment ());
+							screenSlidePageFragments.get (i).setImageSearchItem (imageSearchItems.get (i));
 						}
 					} catch (JSONException e) {
 						e.printStackTrace ();
@@ -141,5 +150,24 @@ public class MainActivity extends AppCompatActivity {
 				}
 			}
 		});
+	}
+
+	private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+		LinkedList<ScreenSlidePageFragment> screenSlidePageFragments;
+
+		public ScreenSlidePagerAdapter (FragmentManager fm, LinkedList<ScreenSlidePageFragment> screenSlidePageFragments) {
+			super (fm);
+			this.screenSlidePageFragments = screenSlidePageFragments;
+		}
+
+		@Override
+		public ScreenSlidePageFragment getItem (int position) {
+			return screenSlidePageFragments.get (position);
+		}
+
+		@Override
+		public int getCount () {
+			return NUM_PAGES;
+		}
 	}
 }
